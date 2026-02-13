@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 fun SecretSantaApp() {
     // 1) Liste en dur
     val allPeople = listOf(
-        "Adrien", "Tony", "Goonito", "Awek", "Maxime", "Xoco"
+        "Adrien", "Tony", "Goonito", "Awek", "Maxime", "Corentin", "Ryio", "Sun"
     )
 
     // 2) État des cases (nom -> coché ?)
