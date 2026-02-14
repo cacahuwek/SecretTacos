@@ -12,6 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.Alignment
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.ui.semantics.Role
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +56,7 @@ fun SecretSantaApp() {
             .fillMaxSize()
             .padding(
                 start = 16.dp,
-                top = 48.dp,   // <-- augmente ça pour descendre
+                top = 48.dp,   // <-- augmenter ça pour descendre
                 end = 16.dp,
                 bottom = 16.dp
     )) {
@@ -69,6 +71,7 @@ fun SecretSantaApp() {
         ) {
 
             items(allPeople) { name ->
+                val isChecked = checked[name] == true
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -78,14 +81,19 @@ fun SecretSantaApp() {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 12.dp, vertical = 10.dp),
+                            .toggleable(
+                                value = isChecked,
+                                role = Role.Checkbox,
+                                onValueChange = { checked[name] = it }
+                            )
+                            .padding(horizontal = 12.dp, vertical = 20.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically // ✅ centre sur l'axe Y
                     ) {
                         Text(name)
                         Checkbox(
-                            checked = checked[name] == true,
-                            onCheckedChange = { checked[name] = it }
+                            checked = isChecked,
+                            onCheckedChange = null
                         )
                     }
                 }
